@@ -18,7 +18,7 @@
   cursor: pointer;
   background-size: contain;
   background-repeat: no-repeat;
-  background-image: url("/assets/icons/chevron-left.svg");
+  background-image: url("icons/chevron-left.svg");
 }
 
 .selector--arrow.right {
@@ -54,11 +54,11 @@
 }
 
 .cell.empty {
-  background-image: url("/assets/icons/empty-glass.svg");
+  background-image: url("icons/empty-glass.svg");
 }
 
 .cell.full {
-  background-image: url("/assets/icons/full-glass.svg");
+  background-image: url("icons/full-glass.svg");
 }
 
 .cell.today {
