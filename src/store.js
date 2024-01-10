@@ -29,15 +29,15 @@ const createStore = (val) => {
     },
     set(target, p, value) {
       target[p] = value
-      sendUpdates()
 
       if (p === 'viewType')
         saveViewType(value)
 
-      if (target?.__proto__?.name === 'checkedDates' && /\d/.test(p)) {
+      if (target?.__proto__?.name === 'checkedDates') {
         saveCheckedDates(target)
       }
 
+      sendUpdates()
       return true
     },
   })
