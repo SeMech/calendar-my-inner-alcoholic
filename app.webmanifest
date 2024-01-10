@@ -1,0 +1,13 @@
+{
+   "name": "Drink calendar",
+   "short_name": "Calendar",
+   "icons": [
+      {
+         "src": "assets/images/app-icon-512.png",
+         "type": "image/png",
+         "sizes": "512x512"
+      }
+   ],
+   "start_url": "/calendar-my-inner-alcoholic",
+   "display": "standalone"
+}
