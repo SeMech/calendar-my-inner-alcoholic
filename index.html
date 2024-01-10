@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Drink calendar</title>
+
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- styles -->
+  <link rel="stylesheet" href="src/css/reset.css" />
+  <link rel="stylesheet" href="src/css/main.css" />
+  <link rel="stylesheet" href="src/css/calendar.css" />
+</head>
+<body>
+  <header>
+    <div class="title">Calendar</div>
+    <div class="tabs">
+      <div class="tab active" id="tab-month">Month</div>
+      <div class="tab" id="tab-year">Year</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="selector">
+      <div class="selector--arrow" data-arrow-mode="prev"></div>
+      <div class="selector--item"></div>
+      <div class="selector--arrow right" data-arrow-mode="next"></div>
+    </div>
+
+    <div class="calendar" id="calendar-root"></div>
+    <div class="year-calendar" id="year-calendar-root"></div>
+  </main>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
