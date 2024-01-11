@@ -4,14 +4,6 @@ import {getNextDate, getPrevDate} from '../utils/dateUtils.js'
 
 const dayTime = 24*60*60*1000
 
-const resetCalendarStyleHeight = () => {
-  const container = DOM.calendarContainer
-  const currentHeight = container.offsetHeight
-  const newHeight = (container.offsetWidth / 7) * 6 + 50
-  if (currentHeight !== newHeight)
-  container.style.height = newHeight + 'px'
-}
-
 const handleCellClick = (event) => {
   const time = event.target.getAttribute('data-time')
   const foundTimeIndex = store.checkedDates.findIndex(t => t === time)
@@ -37,8 +29,6 @@ const renderCalendar = () => {
     container.classList.remove('hidden')
 
   container.innerHTML = ""
-
-  resetCalendarStyleHeight()
 
   const currentDate = new Date(store.currentYear, store.currentMonth, 1)
   const localeCurrentDate = new Date()
