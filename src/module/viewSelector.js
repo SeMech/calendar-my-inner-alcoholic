@@ -27,12 +27,12 @@ const renderView = () => {
   }
 }
 
-const handleClickTabMonth = () => {
+export const handleClickTabMonth = () => {
   store.viewType = ViewType.Month
   renderView()
 }
 
-const handleClickTabYear = () => {
+export const handleClickTabYear = () => {
   store.viewType = ViewType.Year
   renderView()
 }

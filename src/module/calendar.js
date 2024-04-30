@@ -1,6 +1,7 @@
 import {DOM, ViewType} from '../config.js'
 import {store, subscribeStore} from '../store.js'
-import {getNextDate, getPrevDate} from '../utils/dateUtils.js'
+import {getCurrentMonthIndex, getCurrentYear, getNextDate, getPrevDate} from '../utils/dateUtils.js'
+import {handleClickTabMonth} from './viewSelector.js'
 
 const dayTime = 24*60*60*1000
 
@@ -24,6 +25,9 @@ const renderCalendar = () => {
 
     return false
   }
+
+  const totalDays = []
+  const drinkingDays = []
 
   if (container.classList.contains('hidden'))
     container.classList.remove('hidden')
@@ -50,12 +54,14 @@ const renderCalendar = () => {
 
       const time = date.getTime().toString()
 
+      let isStored = store.checkedDates.includes(time)
+
       cell.setAttribute('data-time', time)
       cell.addEventListener('click', handleCellClick)
 
       cell.innerText = date.toLocaleDateString('ru-RU', { day: '2-digit' })
 
-      if (store.checkedDates.includes(time)) {
+      if (isStored) {
         cell.classList.add('full')
       } else {
         cell.classList.add('empty')
@@ -64,6 +70,10 @@ const renderCalendar = () => {
       // if other month
       if (date.getMonth() !== store.currentMonth) {
         cell.classList.add('other-month')
+      } else {
+        if (isStored)
+          drinkingDays.push(time)
+        totalDays.push(time)
       }
 
       // if today
@@ -76,6 +86,10 @@ const renderCalendar = () => {
       date = new Date(date.getTime() + dayTime)
     }
   }
+
+  DOM.statistic.totalDays.innerText = totalDays.length.toString()
+  DOM.statistic.drinking.innerText = drinkingDays.length.toString()
+  DOM.statistic.notDrinking.innerText = (totalDays.length - drinkingDays.length).toString()
 }
 
 const renderYearCalendar = () => {
@@ -91,6 +105,9 @@ const renderYearCalendar = () => {
   if (container.classList.contains('hidden'))
     container.classList.remove('hidden')
 
+  const totalDays = []
+  const drinkingDays = []
+
   container.innerHTML = ""
 
   for (let i = 0; i < 12; i++) {
@@ -100,6 +117,11 @@ const renderYearCalendar = () => {
 
     const monthEl = document.createElement('div')
     monthEl.classList.add('year-month')
+
+    monthEl.addEventListener('click', () => {
+      handleClickTabMonth()
+      viewSelectedMonth(i)
+    })
 
     const monthText = document.createElement('div')
     monthText.classList.add('title')
@@ -124,8 +146,13 @@ const renderYearCalendar = () => {
 
         if (date.getMonth() !== currentMonthIndex) {
           cell.classList.add('other-day')
-        } else if (store.checkedDates.includes(time)) {
-          cell.classList.add('full')
+        } else {
+          if (store.checkedDates.includes(time)) {
+            cell.classList.add('full')
+            drinkingDays.push(time)
+          }
+
+          totalDays.push(time)
         }
 
         monthCellsEl.appendChild(cell)
@@ -137,6 +164,10 @@ const renderYearCalendar = () => {
     monthEl.append(monthText, monthCellsEl)
     container.appendChild(monthEl)
   }
+
+  DOM.statistic.totalDays.innerText = totalDays.length.toString()
+  DOM.statistic.drinking.innerText = drinkingDays.length.toString()
+  DOM.statistic.notDrinking.innerText = (totalDays.length - drinkingDays.length).toString()
 }
 
 const renderSelector = () => {
@@ -146,11 +177,16 @@ const renderSelector = () => {
     DOM.selector.item.innerText = store.currentYear
 }
 
+const renderTodayButton = () => {
+  DOM.todayButton.hidden = !(store.currentMonth !== getCurrentMonthIndex() || store.currentYear !== getCurrentYear());
+}
+
 const listenStore = () => {
   renderSelector()
 
   renderCalendar()
   renderYearCalendar()
+  renderTodayButton()
 }
 
 const handleClickPrevButton = () => {
@@ -173,11 +209,21 @@ const handleClickNextButton = () => {
   }
 }
 
+const handleClickTodayButton = () => {
+  store.currentYear = getCurrentYear()
+  store.currentMonth = getCurrentMonthIndex()
+}
+
+const viewSelectedMonth = (month) => {
+  store.currentMonth = month
+}
+
 export const initCalendar = () => {
   listenStore()
 
   DOM.selector.arrowPrev.addEventListener('click', handleClickPrevButton)
   DOM.selector.arrowNext.addEventListener('click', handleClickNextButton)
+  DOM.todayButton.addEventListener('click', handleClickTodayButton)
 
   subscribeStore(listenStore)
 }

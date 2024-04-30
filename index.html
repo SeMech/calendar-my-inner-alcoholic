@@ -68,10 +68,25 @@
 
     <div class="calendar" id="calendar-root"></div>
     <div class="year-calendar" id="year-calendar-root"></div>
+
+    <section class="statistic">
+      <div class="statistic-title">Statistic</div>
+      <div class="statistic-param">
+        Days of drinking: <span class="statistic-value" id="statistic-value-drinking"></span>
+      </div>
+      <div class="statistic-param">
+        I haven't had a drink in days: <span class="statistic-value" id="statistic-value-not-drink"></span>
+      </div>
+      <div class="statistic-param">
+        Total days: <span class="statistic-value" id="statistic-value-total-days"></span>
+      </div>
+    </section>
+
+    <button class="button-go-today" id="button-go-today" hidden>Go to today</button>
   </main>
 
   <footer>
-    version 0.0.2
+    version 0.0.3
   </footer>
 
   <script type="module" src="src/main.js"></script>
