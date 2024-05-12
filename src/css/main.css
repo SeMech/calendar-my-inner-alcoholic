@@ -1,6 +1,8 @@
 :root {
   --text-color: #343434;
   --no-active-text-color: #d5d5d5;
+  --not-come-text-color: #959595;
+  --not-come-icon-color: #e8e8e8;
 }
 
 body {

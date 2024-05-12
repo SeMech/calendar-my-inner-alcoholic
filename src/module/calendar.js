@@ -6,6 +6,7 @@ import {handleClickTabMonth} from './viewSelector.js'
 const dayTime = 24*60*60*1000
 
 const handleCellClick = (event) => {
+  console.log('test')
   const time = event.target.getAttribute('data-time')
   const foundTimeIndex = store.checkedDates.findIndex(t => t === time)
 
@@ -57,7 +58,6 @@ const renderCalendar = () => {
       let isStored = store.checkedDates.includes(time)
 
       cell.setAttribute('data-time', time)
-      cell.addEventListener('click', handleCellClick)
 
       cell.innerText = date.toLocaleDateString('ru-RU', { day: '2-digit' })
 
@@ -70,10 +70,17 @@ const renderCalendar = () => {
       // if other month
       if (date.getMonth() !== store.currentMonth) {
         cell.classList.add('other-month')
+        if (date.getTime() > localeCurrentDate.getTime()) {
+          cell.classList.add('not-come')
+        }
+      } else if (date.getTime() > localeCurrentDate.getTime()) {
+        cell.classList.add('not-come')
       } else {
         if (isStored)
           drinkingDays.push(time)
         totalDays.push(time)
+
+        cell.addEventListener('click', handleCellClick)
       }
 
       // if today
@@ -107,6 +114,9 @@ const renderYearCalendar = () => {
 
   const totalDays = []
   const drinkingDays = []
+
+  const localeCurrentDate = new Date()
+  localeCurrentDate.setHours(0,0,0, 0)
 
   container.innerHTML = ""
 
@@ -146,6 +156,8 @@ const renderYearCalendar = () => {
 
         if (date.getMonth() !== currentMonthIndex) {
           cell.classList.add('other-day')
+        } else if (date.getTime() > localeCurrentDate.getTime()) {
+          cell.classList.add('not-come')
         } else {
           if (store.checkedDates.includes(time)) {
             cell.classList.add('full')
