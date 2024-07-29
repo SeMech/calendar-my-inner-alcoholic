@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {VIEW_TYPE} from '../../constants/common.ts'
 import {computed} from 'vue'
+import { getMonthName } from '../../utils/dateUtils.ts'
 
 type Props = {
   viewType: VIEW_TYPE,
@@ -17,9 +18,6 @@ const props = defineProps<Props>()
 const nextFn = computed(() => props.viewType === VIEW_TYPE.MONTH ? props.nextMonth : props.nextYear)
 const prevFn = computed(() => props.viewType === VIEW_TYPE.MONTH ? props.prevMonth : props.prevYear)
 
-const renderMonth = () =>
-  (new Date(props.selectedYear, props.selectedMonthIndex)).toLocaleDateString('en', { month: 'long' })
-
 </script>
 
 <template>
@@ -29,7 +27,7 @@ const renderMonth = () =>
       @click="prevFn"
     />
     <div class="item">
-      {{ viewType === VIEW_TYPE.MONTH ? renderMonth() : undefined }} {{ selectedYear }}
+      {{ viewType === VIEW_TYPE.MONTH ? getMonthName(props.selectedYear, props.selectedMonthIndex) : undefined }} {{ selectedYear }}
     </div>
     <div
       class="arrow right"

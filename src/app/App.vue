@@ -5,7 +5,7 @@ import {getCurrentMonthIndex, getCurrentYear, getNextDate, getPrevDate} from '..
 import {Statistic} from '../components/statistic'
 import {Controls} from '../components/controls'
 import {VIEW_TYPE} from '../constants/common.ts'
-import {Tabs} from '../components/Tabs'
+import {Tabs} from '../components/tabs/index.ts'
 
 const currentYear = ref(getCurrentYear())
 const currentMonthIndex = ref(getCurrentMonthIndex())
@@ -82,6 +82,7 @@ const setYearType = () => viewType.value = VIEW_TYPE.YEAR
       :selected-year="currentYear"
       :current-day="currentDay"
       :dates="mockDataDays"
+      :view-type
     />
 
     <Statistic

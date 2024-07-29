@@ -24,3 +24,5 @@ export const getNextDate = (year: number, month: number) => {
   return new Date(year, month)
 }
 
+export const getMonthName = (year: number, monthIndex: number) => (new Date(year, monthIndex)).toLocaleDateString('en', { month: 'long' })
+
