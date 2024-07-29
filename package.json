@@ -1,0 +1,28 @@
+{
+  "name": "calendar-my-inner-alcoholic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/main.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^3.4.31"
+  },
+  "devDependencies": {
+    "@types/vue": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.27.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.3",
+    "vue-tsc": "^2.0.26"
+  }
+}

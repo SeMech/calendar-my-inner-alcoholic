@@ -2,8 +2,7 @@ export const getCurrentYear = () => (new Date()).getFullYear()
 
 export const getCurrentMonthIndex = () => (new Date()).getMonth()
 
-export const getPrevDate = (year, month) => {
-  // const date = new Date(year, month)
+export const getPrevDate = (year: number, month: number) => {
   if (month === 1) {
     year--
     month = 12
@@ -14,7 +13,7 @@ export const getPrevDate = (year, month) => {
   return new Date(year, month)
 }
 
-export const getNextDate = (year, month) => {
+export const getNextDate = (year: number, month: number) => {
   if (month === 12) {
     year++
     month = 1
